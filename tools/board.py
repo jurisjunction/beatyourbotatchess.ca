@@ -4,8 +4,8 @@
 
 Dark squares are hatched, as in a nineteenth-century chess book. The solid
 arrow is the move Teresa's Pawn played here, and the dashed arrows are the
-next three it ranked and passed over (a run of 24 October 2026). Morphy
-played Qb3.
+next three it ranked and passed over (a run of 24 October 2026, after play
+by end: it now plays Qb3, as Morphy did).
 
 Pieces: Colin M.L. Burnett (Cburnett), BSD licence; see pieces-LICENSE.txt.
 """
@@ -15,8 +15,8 @@ import chess.svg
 
 S = 45
 MOVES = "e4 e5 Nf3 d6 d4 Bg4 dxe5 Bxf3 Qxf3 dxe5 Bc4 Nf6"
-PLAYED = ("e1", "g1")
-PASSED = [("c4", "d5"), ("b1", "c3"), ("c4", "b5")]
+PLAYED = ("f3", "b3")
+PASSED = [("e1", "g1"), ("c4", "b5"), ("b1", "c3")]
 
 
 def centre(sq):
