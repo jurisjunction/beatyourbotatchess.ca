@@ -104,6 +104,13 @@ footer p { margin: 0 0 0.4rem; }
   <p class="stage">Play it on Lichess as <a href="https://lichess.org/@/pawnOfTeresa">pawnOfTeresa</a>.</p>
 </div>
 
+<section aria-labelledby="point">
+  <h2 id="point">What is the point of it?</h2>
+  <div>
+    <p>Tools for teachers. The work began as a program to help one student work through algebra: it asks rather than tells, and every word it says is checked against what it actually sees. Chess is where we test that idea in the open, against anyone who wants a game.</p>
+    <p>The bot on Lichess is the research side: a player in a past master's style, with a person's limits, that gets to know you as an opponent. A Teacher mode is in development. It is meant to be set up by a human teacher and to stay under that teacher, never in their place.</p>
+  </div>
+</section>
 <section aria-labelledby="llm">
   <h2 id="llm">Does it use a language model?</h2>
   <div>
@@ -139,6 +146,7 @@ footer p { margin: 0 0 0.4rem; }
   <div>
     <p>In aim, a little: both are meant to play like people, not like engines. In how, not much. Maia is a neural network trained on millions of Lichess games to play like players of a given rating.</p>
     <p>This bot learned one master's taste from a few hundred of his games. It chooses only among moves that rules you could read aloud call sound, and it looks just a few moves ahead. That is why it can tell you why it played a move.</p>
+    <p>Maia is the same Maia for everyone. This bot keeps a picture of each opponent, read off their moves against it, and everything in that picture is a named count or weight you can read, not the inside of a network.</p>
   </div>
 </section>
 <section aria-labelledby="books">
@@ -151,14 +159,22 @@ footer p { margin: 0 0 0.4rem; }
 <section aria-labelledby="know">
   <h2 id="know">Does it get to know me?</h2>
   <div>
-    <p>A little, and less than we have sometimes said. Type <strong>remember me</strong> and, at the start of your next game, it reads back your past games with it and greets you with your record. Type <strong>forget me</strong> and it stops.</p>
-    <p>It does not yet change how it plays as it gets to know you. That is planned: at first it would play its school's plain principles, as a person does against a stranger, and open up as it learns how you play.</p>
+    <p>Yes, from your moves against it and nothing else. As you play, it keeps a picture of you: which wins on the board you took and which you passed, when you gave material away, how far ahead your moves seem to look, and what you like to play, such as captures, checks or trading queens. Type <strong>what do you know about me</strong> and it tells you.</p>
+    <p>It uses that picture in one way. Among the moves it would be happy to play anyway, it prefers the ones where your likely replies go wrong. It never plays an unsound move in the hope that you miss something. Your first moves count for little; the picture firms up over a game.</p>
+    <p>Type <strong>remember me</strong> and it also reads your earlier games with it back from Lichess at the start of each game, so it knows you from the first move. Type <strong>forget me</strong> and it stops. It never looks at your games against anyone else.</p>
+  </div>
+</section>
+<section aria-labelledby="like">
+  <h2 id="like">Will it learn to play like me?</h2>
+  <div>
+    <p>No. It stays in its master's style. What changes as you play is its picture of you, and with it which of its own moves it chooses against you.</p>
   </div>
 </section>
 <section aria-labelledby="keep">
   <h2 id="keep">What does it keep about me?</h2>
   <div>
     <p>Its record of the games it plays: the moves, the result and Lichess's public id for each game. The record never holds your name. If you asked it to remember you, it follows you on Lichess until you say <strong>forget me</strong>.</p>
+    <p>Its picture of you is never stored. It is built again from the games each time. Between moves of a correspondence game it keeps a few notes about the game itself, such as whether you asked it to explain its moves, but never your name or your words, and it deletes them when the game ends.</p>
     <p>The program that runs it keeps a log on our machine while it works, and the log shows usernames and what is said in the game chat.</p>
   </div>
 </section>
@@ -167,6 +183,20 @@ footer p { margin: 0 0 0.4rem; }
   <div>
     <p>Partly. When it explains a move, it tells you exactly what weighed most in choosing it and which moves it passed over: a readout of the choice, not a story made up afterwards.</p>
     <p>It also names what it is playing for, such as the centre or your king, and what the move did for that. But that aim does not yet choose the move. In testing on Morphy's games, letting it steer made the bot a little less like Morphy, so for now the aim is shown and not used.</p>
+  </div>
+</section>
+<section aria-labelledby="clock">
+  <h2 id="clock">Does the clock matter?</h2>
+  <div>
+    <p>Yes. It keeps a human clock. It plans its time move by move as a person would: quick in the opening, longer when the position is tense, quick again when there is little to choose, and it pauses before moving so as not to answer at machine speed. Short of time, it looks less far ahead at fewer moves.</p>
+    <p>It also has only so much thought for a whole game, set by the time control, and it tires as that runs down: it looks less far and considers fewer moves. So clock strategy is fair play. A long game, with tense positions that make it think hard, tires it, and low on time it is easier to trick.</p>
+    <p>In correspondence there is no clock, but it still tires over a long game, just as it would in one sitting.</p>
+  </div>
+</section>
+<section aria-labelledby="corr">
+  <h2 id="corr">Can I play it by correspondence?</h2>
+  <div>
+    <p>Yes. It plays up to a hundred correspondence games at once and answers your move usually within a minute or two. If you wrote in the chat while it was away, it reads that before it moves.</p>
   </div>
 </section>
 <section aria-labelledby="who">
@@ -179,7 +209,8 @@ footer p { margin: 0 0 0.4rem; }
 <section aria-labelledby="beat">
   <h2 id="beat">Can I beat it?</h2>
   <div>
-    <p>That is the point. It looks a few moves ahead and no further, and it tires as a game goes on. Beating it means you saw further than a bot in Morphy's style, not that you would have beaten Morphy.</p>
+    <p>That is the point. It looks a few moves ahead and no further, and it tires as a game goes on (see <a href="#clock">the clock</a>). Beating it means you saw further than a bot in Morphy's style, not that you would have beaten Morphy.</p>
+    <p>It plays against its picture of you, but only among moves it would play anyway, so surprising it is a fair weapon: a move its picture did not expect makes the picture less sure of you.</p>
   </div>
 </section>
 <section aria-labelledby="done">
