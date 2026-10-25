@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions · Beat Your Bot at Chess</title>
+<meta name="description" content="Questions about Teresa's Pawn, a chess bot in the style of Paul Morphy: what it learned from, what it keeps, and what is still to come.">
+<meta name="theme-color" content="#1D3A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-700-normal.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-800-normal.woff2) format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya Sans"; src: url(../fonts/alegreya-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya Sans"; src: url(../fonts/alegreya-sans-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Alegreya Sans"; src: url(../fonts/alegreya-sans-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+
+:root {
+  --baize: #1D3A2B;
+  --baize-line: #33533F;
+  --ivory: #EEE7D4;
+  --ivory-dim: #BFB9A6;
+  --brass: #DDB45A;
+  --ink: #22261F;
+  --square: #EFE8D5;
+  --hatch: #2F5541;
+  --serif: "Alegreya", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --measure: 33rem;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--baize);
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  font-kerning: normal;
+}
+a { color: var(--brass); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+
+.page { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 4rem; }
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.75rem 0 0; font-family: var(--sans); font-size: 1.0625rem; }
+.top .sig { font-family: var(--serif); font-weight: 700; font-size: 1.25rem; color: var(--ivory); text-decoration: none; }
+
+.intro { padding: 3rem 0 1rem; max-width: 40rem; }
+.intro h1 { max-width: none; font-size: clamp(2.6rem, 5vw, 4rem); }
+.hero { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 3rem; align-items: center; padding: 4rem 0 3.5rem; }
+h1 { font-weight: 800; font-size: clamp(3rem, 6.6vw, 5.4rem); line-height: 0.95; letter-spacing: -0.012em; margin: 0 0 1.75rem; max-width: 10ch; }
+.lede { margin: 0 0 1.25rem; max-width: 27rem; font-size: 1.375rem; line-height: 1.5; }
+.stage { font-family: var(--sans); font-style: italic; color: var(--ivory-dim); font-size: 1.0625rem; margin: 0; }
+
+figure { margin: 0; }
+.diagram { display: block; width: 100%; max-width: 31rem; height: auto; margin-left: auto; }
+figcaption { max-width: 31rem; margin: 1rem 0 0 auto; font-size: 1.0625rem; line-height: 1.5; color: var(--ivory-dim); }
+.frame { fill: none; stroke: var(--ivory); stroke-width: 2.5; }
+.light { fill: var(--square); }
+.dark { fill: url(#hatch); }
+.hatchline { stroke: var(--hatch); stroke-width: 1.6; }
+.coord { fill: var(--ivory-dim); font-family: var(--sans); font-size: 13px; }
+.played { stroke: var(--baize); stroke-linecap: round; }
+.played-head { fill: var(--baize); }
+.passed { stroke: var(--ink); stroke-dasharray: 6 5; stroke-linecap: round; opacity: 0.85; }
+.passed-head { fill: var(--ink); opacity: 0.85; }
+
+section { border-top: 1px solid var(--baize-line); padding: 3rem 0 1rem; display: grid; grid-template-columns: 14rem minmax(0, var(--measure)); column-gap: 3rem; }
+h2 { font-weight: 700; font-size: 1.75rem; line-height: 1.2; margin: 0 0 1rem; }
+section > div p { margin: 0 0 1.1rem; }
+ol { margin: 0 0 1.25rem; padding-left: 1.4rem; }
+ol li { margin: 0 0 0.35rem; padding-left: 0.25rem; }
+ol li::marker { font-family: var(--sans); color: var(--brass); }
+
+footer { border-top: 1px solid var(--baize-line); margin-top: 2rem; padding-top: 1.5rem; font-family: var(--sans); color: var(--ivory-dim); font-size: 1rem; }
+footer p { margin: 0 0 0.4rem; }
+
+@media (max-width: 58rem) {
+  .hero { grid-template-columns: 1fr; padding: 3rem 0; gap: 2.25rem; }
+  .diagram, figcaption { margin-left: 0; }
+  section { grid-template-columns: 1fr; }
+}
+@media (max-width: 40rem) {
+  body { font-size: 1.1875rem; }
+  .page { padding: 0 1rem 3rem; }
+  .lede { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top">
+  <a class="sig" href="../">Teresa's Pawn</a>
+  <a href="https://luktor.ca">Luktor Labs</a>
+</header>
+<main>
+<div class="intro">
+  <h1>Questions</h1>
+  <p class="lede">What the bot does today, as of 25 October 2026. Where something is only planned, we say so.</p>
+  <p class="stage">Play it on Lichess as <a href="https://lichess.org/@/pawnOfTeresa">pawnOfTeresa</a>.</p>
+</div>
+
+<section aria-labelledby="llm">
+  <h2 id="llm">Does it use a language model?</h2>
+  <div>
+    <p>No. A language model chooses none of its moves and writes none of its words. Everything it says in the chat is a sentence written in advance and filled in with what it saw. That is why it can sound like an old chat bot.</p>
+    <p>Plainer wording is being worked on. When it comes, it will be labelled as a model's wording, checked against what the bot actually saw, and off unless you turn it on.</p>
+  </div>
+</section>
+<section aria-labelledby="learn">
+  <h2 id="learn">How did it learn to play like Morphy?</h2>
+  <div>
+    <p>From Morphy's own games, and nothing else of his. In each position he faced, it learned which of the moves it can see he tended to choose.</p>
+    <p>Today that is 211 of his games, the regular ones in a public collection. His full record is about 400, counting the games in which he gave odds, and the rest are the next step. It did not study millions of games, and it did not learn by playing itself.</p>
+  </div>
+</section>
+<section aria-labelledby="choose">
+  <h2 id="choose">How does it choose a move?</h2>
+  <div>
+    <p>Much as a club player does, only more methodically. It looks at every legal move one move deep for each side, and two or three moves deep at the few it likes best. Written rules set aside the moves that lose material for nothing. Morphy's school will give material for an attack on the king, for time, or for open lines, and so will the bot.</p>
+    <p>Among the moves left, it chooses as Morphy tended to, weighing about fifty named features of a move: development, the centre, open files, pressure on the king, and so on. A small learned intuition settles close calls. It remembers its last few moves, so it keeps to what it was doing, and it has only so much thought for a whole game, so it tires.</p>
+  </div>
+</section>
+
+<section aria-labelledby="close">
+  <h2 id="close">How close is it to Morphy?</h2>
+  <div>
+    <p>It is measured on games of his it never learned from. There, it plays the move Morphy played 48% of the time, out of the twenty to forty moves open to it in a typical position. Picking among them at random would get about three in a hundred. Its Steinitz bot, coming next, plays Steinitz's move 40% of the time.</p>
+    <p>That is closeness of taste, not of strength. It sees a few moves ahead; Morphy saw much further.</p>
+  </div>
+</section>
+
+<section aria-labelledby="maia">
+  <h2 id="maia">Is it like Maia?</h2>
+  <div>
+    <p>In aim, a little: both are meant to play like people, not like engines. In how, not much. Maia is a neural network trained on millions of Lichess games to play like players of a given rating.</p>
+    <p>This bot learned one master's taste from a few hundred of his games. It chooses only among moves that rules you could read aloud call sound, and it looks just a few moves ahead. That is why it can tell you why it played a move.</p>
+  </div>
+</section>
+<section aria-labelledby="books">
+  <h2 id="books">Did it read books about Morphy?</h2>
+  <div>
+    <p>Not yet, as far as its play goes. Books about him, such as Frisco Del Rosario's <cite>A First Book of Morphy</cite>, are used in our research notes only. What it says in public chat comes from the game scores alone.</p>
+    <p>The opening theory of his day, which he would have known, is still to be added.</p>
+  </div>
+</section>
+<section aria-labelledby="know">
+  <h2 id="know">Does it get to know me?</h2>
+  <div>
+    <p>A little, and less than we have sometimes said. Type <strong>remember me</strong> and, at the start of your next game, it reads back your past games with it and greets you with your record. Type <strong>forget me</strong> and it stops.</p>
+    <p>It does not yet change how it plays as it gets to know you. That is planned: at first it would play its school's plain principles, as a person does against a stranger, and open up as it learns how you play.</p>
+  </div>
+</section>
+<section aria-labelledby="keep">
+  <h2 id="keep">What does it keep about me?</h2>
+  <div>
+    <p>Its record of the games it plays: the moves, the result and Lichess's public id for each game. The record never holds your name. If you asked it to remember you, it follows you on Lichess until you say <strong>forget me</strong>.</p>
+    <p>The program that runs it keeps a log on our machine while it works, and the log shows usernames and what is said in the game chat.</p>
+  </div>
+</section>
+<section aria-labelledby="plan">
+  <h2 id="plan">Is the plan it tells me the reason for its move?</h2>
+  <div>
+    <p>Partly. When it explains a move, it tells you exactly what weighed most in choosing it and which moves it passed over: a readout of the choice, not a story made up afterwards.</p>
+    <p>It also names what it is playing for, such as the centre or your king, and what the move did for that. But that aim does not yet choose the move. In testing on Morphy's games, letting it steer made the bot a little less like Morphy, so for now the aim is shown and not used.</p>
+  </div>
+</section>
+<section aria-labelledby="who">
+  <h2 id="who">Which players will there be?</h2>
+  <div>
+    <p>Only players who have died, from games whose scores are in the public domain. Morphy is the first. Wilhelm Steinitz is next, learned from 583 of his games, and you will be able to choose which year's Steinitz you face.</p>
+    <p>A bot of a living player is made only with their consent, signed with their own key, and is meant to stop when they withdraw it.</p>
+  </div>
+</section>
+<section aria-labelledby="beat">
+  <h2 id="beat">Can I beat it?</h2>
+  <div>
+    <p>That is the point. It looks a few moves ahead and no further, and it tires as a game goes on. Beating it means you saw further than a bot in Morphy's style, not that you would have beaten Morphy.</p>
+  </div>
+</section>
+<section aria-labelledby="done">
+  <h2 id="done">Is it finished?</h2>
+  <div>
+    <p>No. It is a research version, still being tested. This page says what it does today, and where something is only planned, it says so.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>From <a href="https://luktor.ca">Luktor Labs</a>, a small family workshop in Ontario. <a href="../">Back to the bot</a>.</p>
+  <p>This site sets no cookies and loads nothing from anyone else.</p>
+</footer>
+
+</div>
+</body>
+</html>
