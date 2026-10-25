@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · Beat Your Bot at Chess</title>
+<meta name="description" content="What Teresa's Pawn and this site keep about you, where, and for how long.">
+<meta name="theme-color" content="#1D3A2B">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-700-normal.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya"; src: url(../fonts/alegreya-latin-800-normal.woff2) format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya Sans"; src: url(../fonts/alegreya-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Alegreya Sans"; src: url(../fonts/alegreya-sans-latin-400-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Alegreya Sans"; src: url(../fonts/alegreya-sans-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+
+:root {
+  --baize: #1D3A2B;
+  --baize-line: #33533F;
+  --ivory: #EEE7D4;
+  --ivory-dim: #BFB9A6;
+  --brass: #DDB45A;
+  --ink: #22261F;
+  --square: #EFE8D5;
+  --hatch: #2F5541;
+  --serif: "Alegreya", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --measure: 33rem;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--baize);
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  font-kerning: normal;
+}
+a { color: var(--brass); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+
+.page { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 4rem; }
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.75rem 0 0; font-family: var(--sans); font-size: 1.0625rem; }
+.top .sig { font-family: var(--serif); font-weight: 700; font-size: 1.25rem; color: var(--ivory); text-decoration: none; }
+
+.intro { padding: 3rem 0 1rem; max-width: 40rem; }
+.intro h1 { max-width: none; font-size: clamp(2.6rem, 5vw, 4rem); }
+.hero { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 3rem; align-items: center; padding: 4rem 0 3.5rem; }
+h1 { font-weight: 800; font-size: clamp(3rem, 6.6vw, 5.4rem); line-height: 0.95; letter-spacing: -0.012em; margin: 0 0 1.75rem; max-width: 10ch; }
+.lede { margin: 0 0 1.25rem; max-width: 27rem; font-size: 1.375rem; line-height: 1.5; }
+.stage { font-family: var(--sans); font-style: italic; color: var(--ivory-dim); font-size: 1.0625rem; margin: 0; }
+
+figure { margin: 0; }
+.diagram { display: block; width: 100%; max-width: 31rem; height: auto; margin-left: auto; }
+figcaption { max-width: 31rem; margin: 1rem 0 0 auto; font-size: 1.0625rem; line-height: 1.5; color: var(--ivory-dim); }
+.frame { fill: none; stroke: var(--ivory); stroke-width: 2.5; }
+.light { fill: var(--square); }
+.dark { fill: url(#hatch); }
+.hatchline { stroke: var(--hatch); stroke-width: 1.6; }
+.coord { fill: var(--ivory-dim); font-family: var(--sans); font-size: 13px; }
+.played { stroke: var(--baize); stroke-linecap: round; }
+.played-head { fill: var(--baize); }
+.passed { stroke: var(--ink); stroke-dasharray: 6 5; stroke-linecap: round; opacity: 0.85; }
+.passed-head { fill: var(--ink); opacity: 0.85; }
+
+section { border-top: 1px solid var(--baize-line); padding: 3rem 0 1rem; display: grid; grid-template-columns: 14rem minmax(0, var(--measure)); column-gap: 3rem; }
+h2 { font-weight: 700; font-size: 1.75rem; line-height: 1.2; margin: 0 0 1rem; }
+section > div p { margin: 0 0 1.1rem; }
+ol, ul { margin: 0 0 1.25rem; padding-left: 1.4rem; }
+ol li, ul li { margin: 0 0 0.6rem; padding-left: 0.25rem; }
+ol li::marker, ul li::marker { font-family: var(--sans); color: var(--brass); }
+
+footer { border-top: 1px solid var(--baize-line); margin-top: 2rem; padding-top: 1.5rem; font-family: var(--sans); color: var(--ivory-dim); font-size: 1rem; }
+footer p { margin: 0 0 0.4rem; }
+
+@media (max-width: 58rem) {
+  .hero { grid-template-columns: 1fr; padding: 3rem 0; gap: 2.25rem; }
+  .diagram, figcaption { margin-left: 0; }
+  section { grid-template-columns: 1fr; }
+}
+@media (max-width: 40rem) {
+  body { font-size: 1.1875rem; }
+  .page { padding: 0 1rem 3rem; }
+  .lede { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top">
+  <a class="sig" href="../">Teresa's Pawn</a>
+  <a href="https://luktor.ca">Luktor Labs</a>
+</header>
+<main>
+<div class="intro">
+  <h1>Privacy</h1>
+  <p class="lede">What we keep about you, where, and for how long, as of 25 October 2026.</p>
+  <p class="stage">Questions to <a href="mailto:hello@luktor.ca">hello@luktor.ca</a>.</p>
+</div>
+
+<section aria-labelledby="short">
+  <h2 id="short">In short</h2>
+  <div>
+    <p>This site keeps nothing about you. The bot keeps a record of the games it plays, without names, and a working log for thirty days. It keeps nothing you type. Anything more is kept only if you ask, and then on Lichess, where you can see it.</p>
+    <p>Nothing is sold or shared, and no model is trained on your games or your words.</p>
+  </div>
+</section>
+<section aria-labelledby="site">
+  <h2 id="site">This site</h2>
+  <div>
+    <p>No cookies, no analytics, no tracking, and nothing loaded from anyone else: the fonts and pictures come from this site itself.</p>
+    <p>It is served by GitHub Pages. As with any website, the servers that send you a page see your internet address, under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. We are sent no record of your visit.</p>
+  </div>
+</section>
+<section aria-labelledby="bot">
+  <h2 id="bot">The bot on Lichess</h2>
+  <div>
+    <p>Lichess's own <a href="https://lichess.org/privacy">privacy policy</a> covers your account, your games and the chat there. Games on Lichess are public, and so are your games with the bot.</p>
+    <p>On our machine, the bot keeps:</p>
+    <ul><li><strong>A record of the games it plays</strong>: the moves, the result, the time control and Lichess's id for the game. Never your name, though the id leads to the game on Lichess, which shows both players. The record is built so that nobody, us included, can change it without the change showing.</li><li><strong>Its memory of those games' positions</strong>, with no names. Today that memory does not change how it plays.</li><li><strong>A working log, kept thirty days</strong>: the games' ids, the Lichess names of the players it plays and of those who challenge it, and what the bot itself says. What you type is logged only as the word it took it for, such as <em>why</em> or <em>explain</em>, never your own words.</li><li><strong>In a correspondence game, a few notes between moves</strong>, such as whether you asked it to explain itself. Never your name or your words. They are deleted when the game ends.</li></ul>
+  </div>
+</section>
+<section aria-labelledby="not">
+  <h2 id="not">What it does not keep</h2>
+  <div>
+    <ul><li>Your words in the chat.</li><li>Its picture of you as a player. That is built again from your moves each game and never saved.</li><li>Anything from your games against anyone else. It never looks at them.</li></ul>
+  </div>
+</section>
+<section aria-labelledby="ask">
+  <h2 id="ask">Only if you ask</h2>
+  <div>
+    <p><strong>remember me</strong>: it follows you on Lichess, which anyone can see there, and at the start of each game it reads your earlier games with it back from Lichess. <strong>forget me</strong> stops it.</p>
+    <p><strong>review</strong>, offered after a game: it asks about one or two of your moves and keeps each answer as one of six set phrases, never your own words, in a study on Lichess. The study is unlisted: anyone with its link can open it, and the link is given only to you. Taking the review also means it remembers you. <strong>forget me</strong> empties the study.</p>
+  </div>
+</section>
+<section aria-labelledby="model">
+  <h2 id="model">No language model, no training on you</h2>
+  <div>
+    <p>No language model reads your games or your chat. The bot's taste was learned from its master's games alone; nothing is trained on yours.</p>
+    <p>What you tell us, in the chat, on Discord or by email, is read by a person, and it shapes what we build next.</p>
+  </div>
+</section>
+<section aria-labelledby="children">
+  <h2 id="children">Children</h2>
+  <div>
+    <p>Lichess's kid mode turns off all chat, so the bot cannot talk with an account in kid mode. It plays it like anyone else, and keeps of those games what it keeps of anyone's.</p>
+  </div>
+</section>
+<section aria-labelledby="contact">
+  <h2 id="contact">Asking us</h2>
+  <div>
+    <p>To ask what we hold about you, write to <a href="mailto:hello@luktor.ca">hello@luktor.ca</a>. We can delete the log, and any study of your answers, at once. The record of games cannot be edited, by design, but it holds no names.</p>
+    <p>Luktor Labs is a small family workshop in Ontario.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>From <a href="https://luktor.ca">Luktor Labs</a>, a small family workshop in Ontario. <a href="../">The bot</a> · <a href="../faq/">Questions</a> · <a href="../privacy/">Privacy</a> · <a href="../why/">Why</a>.</p>
+  <p>This site sets no cookies and loads nothing from anyone else.</p>
+</footer>
+
+</div>
+</body>
+</html>
