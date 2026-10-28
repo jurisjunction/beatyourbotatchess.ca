@@ -115,7 +115,15 @@ footer p { margin: 0 0 0.4rem; }
   <h2 id="llm">Does it use a language model?</h2>
   <div>
     <p>No. A language model chooses none of its moves and writes none of its words. Everything it says in the chat is a sentence written in advance and filled in with what it saw. That is why it can sound like an old chat bot.</p>
-    <p>Plainer wording is being worked on. When it comes, it will be labelled as a model's wording, checked against what the bot actually saw, and off unless you turn it on.</p>
+    <p>What is planned is not a generative model, the kind that writes text, but a type-safe one that only reads (the next question). It is there to make the bot easier and more pleasant to talk to, and for nothing else.</p>
+  </div>
+</section>
+<section aria-labelledby="typesafe">
+  <h2 id="typesafe">What is type-safe AI, and what will it do here?</h2>
+  <div>
+    <p>A generative model, like the ones behind most chat assistants, writes whatever text seems likely to come next. A type-safe model can only answer inside a set it is given: it picks one option from a list, or says how likely a statement is to be true, and it says how sure it is.</p>
+    <p>Here it will have one job: reading what you type. You will be able to ask in your own words, <em>why not take the pawn?</em>, instead of an exact command. The model picks which of the questions the bot can answer you meant, and which move. If it is unsure, the bot asks you to confirm, in a sentence written in advance; if the bot cannot answer that question yet, it says so. It may also pick which of a few prepared wordings of an answer suits you best. The answer itself always comes from the bot, never from the model, and the model never chooses a move.</p>
+    <p>It will be labelled, off unless you turn it on, and never for children. At first it will be a hosted model, TypeSafe's Jev; the aim is one that runs on the Teacher's own machine, so that what you type never leaves it. <a href="../privacy/#reading">The privacy page</a> says what that means for your words.</p>
   </div>
 </section>
 <section aria-labelledby="learn">
