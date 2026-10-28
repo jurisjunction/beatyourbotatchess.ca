@@ -100,7 +100,7 @@ footer p { margin: 0 0 0.4rem; }
 <main>
 <div class="intro">
   <h1>Privacy</h1>
-  <p class="lede">What we keep about you, where, and for how long, as of 25 October 2026.</p>
+  <p class="lede">What we keep about you, where, and for how long, as of 28 October 2026.</p>
   <p class="stage">Questions to <a href="mailto:hello@luktor.ca">hello@luktor.ca</a>.</p>
 </div>
 
@@ -109,6 +109,7 @@ footer p { margin: 0 0 0.4rem; }
   <div>
     <p>This site keeps nothing about you, and neither does the Teacher, whose record of you stays in your browser. The bot keeps a record of the games it plays, without names, and a working log for thirty days. It keeps nothing you type. Anything more is kept only if you ask, and then on Lichess, where you can see it.</p>
     <p>Nothing is sold or shared, and no model is trained on your games or your words.</p>
+    <p>No AI model reads what you type. One that only reads is planned, to make the bot and the Teacher easier to talk to; <a href="#reading">what is coming</a> says how it will treat your words.</p>
   </div>
 </section>
 <section aria-labelledby="site">
@@ -152,6 +153,16 @@ footer p { margin: 0 0 0.4rem; }
   <div>
     <p>No language model reads your games or your chat. The bot's taste was learned from its master's games alone; nothing is trained on yours.</p>
     <p>What you tell us, in the chat, on Discord or by email, is read by a person, and it shapes what we build next.</p>
+  </div>
+</section>
+<section aria-labelledby="reading">
+  <h2 id="reading">What is coming: a model that only reads</h2>
+  <div>
+    <p>To make the bot and the Teacher easier and more pleasant to talk to, we plan to let a small AI model read what you type, so that you can answer and ask in your own words. It will be a type-safe model, not a generative one: it can only pick from a list we give it, such as which of the six set phrases your answer means. It writes nothing and chooses no move. What the bot says still comes from the bot, in sentences written in advance.</p>
+    <p><strong>First, on Lichess, in the review after a game.</strong> It is not turned on yet: it is being measured first against the way the bot reads answers now. When it is on, it reads your answers only if you have asked the bot to remember you, and the offer of a review says that a model, TypeSafe's Jev, will read them, before you give any. What is sent to TypeSafe is the bot's question and your answer, and nothing else: not your name, not your games. The bot keeps only the set phrase it read, in your study, as it does now. Before it is turned on, this page will link TypeSafe's own privacy policy.</p>
+    <p><strong>Children.</strong> It is not meant for children. Lichess gives the bot no way to check a player's age, so it is used only with players who asked to be remembered, and never with an account in kid mode, which cannot chat at all. The public Teacher here will keep refusing it, because it is open to anyone.</p>
+    <p><strong>The goal</strong> is a type-safe model that runs on our own machine, or, for a chess school that runs the Teacher for its students, on the school's, so that what you type never leaves it. There your words are read in the machine's memory and dropped as soon as the set phrase is taken from them: our software never saves or logs them, whoever runs it.</p>
+    <p>Whatever reads your words, they are not kept, not logged and not used to train anything.</p>
   </div>
 </section>
 <section aria-labelledby="children">
